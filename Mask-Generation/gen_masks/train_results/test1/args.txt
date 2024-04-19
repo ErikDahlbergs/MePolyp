@@ -1,0 +1,13 @@
+{
+  "path": "/Users/erikdahlberg/Documents/1. LTH/Examensarbete/MePolyp/Data/Clinic CVB/Masks",
+  "output_path": "/Users/erikdahlberg/Documents/1. LTH/Examensarbete/MePolyp/Mask-Generation/gen_masks",
+  "cuda": 0,
+  "name": "test1",
+  "iter": 500,
+  "start_iter": 0,
+  "batch_size": 8,
+  "im_size": 256,
+  "ckpt": "None",
+  "workers": 2,
+  "save_interval": 1
+}
