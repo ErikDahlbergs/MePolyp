@@ -51,7 +51,8 @@ def get_dir(args):
     if not os.path.exists(args.output_path):
         os.makedirs(args.output_path)
         
-    task_name = os.path.join(args.output_path, 'train_results', args.name)
+    # task_name = os.path.join(args.output_path, 'train_results', args.name)
+    task_name = args.name #changed by me to remove the "train_results" folder
     saved_model_folder = os.path.join(task_name, 'models')
     saved_image_folder = os.path.join(task_name, 'images')
     
