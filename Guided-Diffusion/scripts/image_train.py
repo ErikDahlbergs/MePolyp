@@ -3,24 +3,27 @@ Train a diffusion model on images.
 """
 
 import argparse
+import sys
+import os
+sys.path.append(os.path.abspath('/Users/erikdahlberg/Documents/1. LTH/Examensarbete/MePolyp/Guided-Diffusion')) # to resolve import error
 
-from improved_diffusion import dist_util, logger
-from improved_diffusion.image_datasets import load_data
-from improved_diffusion.resample import create_named_schedule_sampler
-from improved_diffusion.script_util import (
+from guided_diffusion import dist_util, logger
+from guided_diffusion.image_datasets import load_data
+from guided_diffusion.resample import create_named_schedule_sampler
+from guided_diffusion.script_util import (
     model_and_diffusion_defaults,
     create_model_and_diffusion,
     args_to_dict,
     add_dict_to_argparser,
 )
-from improved_diffusion.train_util import TrainLoop
+from guided_diffusion.train_util import TrainLoop
 
 
 def main():
     args = create_argparser().parse_args()
 
     dist_util.setup_dist()
-    logger.configure()
+    logger.configure(dir="Guided-Diffusion/scripts/logs")
 
     logger.log("creating model and diffusion...")
     model, diffusion = create_model_and_diffusion(
@@ -59,7 +62,7 @@ def main():
 
 def create_argparser():
     defaults = dict(
-        data_dir="",
+        data_dir="/Users/erikdahlberg/Documents/1. LTH/Examensarbete/MePolyp/Data/Clinic CVB/Original",
         schedule_sampler="uniform",
         lr=1e-4,
         weight_decay=0.0,

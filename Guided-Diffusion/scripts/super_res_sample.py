@@ -11,8 +11,8 @@ import numpy as np
 import torch as th
 import torch.distributed as dist
 
-from improved_diffusion import dist_util, logger
-from improved_diffusion.script_util import (
+from guided_diffusion import dist_util, logger
+from guided_diffusion.script_util import (
     sr_model_and_diffusion_defaults,
     sr_create_model_and_diffusion,
     args_to_dict,
@@ -34,6 +34,8 @@ def main():
         dist_util.load_state_dict(args.model_path, map_location="cpu")
     )
     model.to(dist_util.dev())
+    if args.use_fp16:
+        model.convert_to_fp16()
     model.eval()
 
     logger.log("loading data...")
