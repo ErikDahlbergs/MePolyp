@@ -20,17 +20,18 @@ source config.sh
 # -----------------------------------------------------------------------------------------------
 #   Training
 # -----------------------------------------------------------------------------------------------
-if [$TRAIN_WITH_CLASSIFIER -eq 1]; then
+if [[ $TRAIN_WITH_CLASSIFIER -eq 1 ]]; then
+    echo "Training with classifier"
     gtimeout 2h python Guided-Diffusion/scripts/classifier_train.py --data_dir "Data/Clinic CVB/Original" $MODEL_FLAGS $DIFFUSION_FLAGS $TRAIN_FLAGS $CLASSIFIER_FLAGS
 else
 # Execute training script with a timeout 
+    echo "Training without classifier"
     gtimeout 2h python Guided-Diffusion/scripts/image_train.py --data_dir "Data/Clinic CVB/Original" $MODEL_FLAGS $DIFFUSION_FLAGS $TRAIN_FLAGS
 fi
 
 # Check if training was successful
-if [ $? -eq 124 ]; then
+if [[ $? -eq 124 ]]; then
     echo "Training terminated due to timeout."
-    
 else
     echo "Training completed successfully."
 fi
@@ -39,10 +40,10 @@ fi
 #   Automatic Sampling
 # -----------------------------------------------------------------------------------------------
 
-    # Find the checkpoint file with the highest number in the filename
+# Find the checkpoint file with the highest number in the filename
 latest_model=$(ls Guided-Diffusion/scripts/logs/ema_0.9999_*.pt | sort -V | tail -n 1)
 
-if [ -z "$latest_model" ]; then
+if [[ -z "$latest_model" ]]; then
     echo "No model checkpoint files found."
 else
     # Create Samples (ema model gives best results)
