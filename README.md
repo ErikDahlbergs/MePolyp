@@ -30,5 +30,5 @@ Models created in this project are available through.
 
 Load them by adding their model path to the ./train_diffusion.sh script. 
 
-# Results
+# 5. Results
 
