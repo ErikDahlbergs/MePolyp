@@ -28,5 +28,7 @@ To create samples based on our pretrained model, simply run the sample script by
 ## 4.2 Pre-trained models
 Models created in this project are available through. 
 
+Load them by adding their model path to the ./train_diffusion.sh script. 
+
 # Results
 
